@@ -86,6 +86,91 @@
       document.getElementById('quiz-screen').classList.add('active');
     }
     window.startQuiz = startQuiz;
+
+    // 题库：8 道情境选择题
+    // 每题 4 个选项，分别对应 G/H/R/S 四个学院
+    const QUESTIONS = [
+      {
+        id: 1,
+        question: '你在霍格沃茨的走廊里听到奇怪的声音，像是有人在哭泣。你会：',
+        options: [
+          { text: '立刻冲过去查看，哪怕可能有危险', house: 'gryffindor' },
+          { text: '先去叫上朋友，一起去看看', house: 'hufflepuff' },
+          { text: '躲在暗处观察，分析声音来源和原因', house: 'ravenclaw' },
+          { text: '判断这件事对自己有没有好处，再决定', house: 'slytherin' },
+        ],
+      },
+      {
+        id: 2,
+        question: '魔药课上，你的坩埚突然爆炸，斯内普教授冷冷看着你。你会：',
+        options: [
+          { text: '承认错误，但内心不服输，下次一定做好', house: 'gryffindor' },
+          { text: '诚恳道歉，主动清理，并向同学求助', house: 'hufflepuff' },
+          { text: '立刻回忆配方步骤，找出爆炸的化学原理', house: 'ravenclaw' },
+          { text: '观察教授表情，判断他是真生气还是在试探', house: 'slytherin' },
+        ],
+      },
+      {
+        id: 3,
+        question: '你发现了一个可以进入禁林的秘密通道，你会：',
+        options: [
+          { text: '今晚就去探险！危险才刺激', house: 'gryffindor' },
+          { text: '先告诉信任的朋友，征得同意一起去', house: 'hufflepuff' },
+          { text: '研究地图和书籍，制定详细计划再去', house: 'ravenclaw' },
+          { text: '评估里面的资源和风险，准备充分后独自前往', house: 'slytherin' },
+        ],
+      },
+      {
+        id: 4,
+        question: '魁地奇选拔赛上，你的朋友和对手发生激烈冲突，你会：',
+        options: [
+          { text: '直接站出来替朋友出头，不管对手多强', house: 'gryffindor' },
+          { text: '调解冲突，努力让双方都冷静下来', house: 'hufflepuff' },
+          { text: '分析规则，找出对己方最有利的解决方案', house: 'ravenclaw' },
+          { text: '利用冲突制造机会，让自己获得上场资格', house: 'slytherin' },
+        ],
+      },
+      {
+        id: 5,
+        question: '期末考试前一周，你最可能：',
+        options: [
+          { text: '临时抱佛脚，但相信直觉和勇气能过关', house: 'gryffindor' },
+          { text: '按部就班复习，每天固定时间学习', house: 'hufflepuff' },
+          { text: '整理知识体系，制作思维导图和笔记', house: 'ravenclaw' },
+          { text: '找到往年考题，分析出题规律，针对性准备', house: 'slytherin' },
+        ],
+      },
+      {
+        id: 6,
+        question: '有人散布关于你的恶意谣言，全校都在议论。你会：',
+        options: [
+          { text: '当众 confront 造谣者，正面硬刚', house: 'gryffindor' },
+          { text: '找信任的人倾诉，用行动证明自己', house: 'hufflepuff' },
+          { text: '调查谣言源头，收集证据理性反击', house: 'ravenclaw' },
+          { text: '观察谁信了谣言，谁是可利用的盟友', house: 'slytherin' },
+        ],
+      },
+      {
+        id: 7,
+        question: '你获得了一个强大的魔法物品，但使用它可能有副作用。你会：',
+        options: [
+          { text: '为了正义的目的使用它，承担后果', house: 'gryffindor' },
+          { text: '只在必要时使用，尽量保护自己和他人', house: 'hufflepuff' },
+          { text: '深入研究它的原理，找到安全使用的方法', house: 'ravenclaw' },
+          { text: '权衡利弊，在最关键的时刻用它达成目标', house: 'slytherin' },
+        ],
+      },
+      {
+        id: 8,
+        question: '如果只能带一样东西进阿兹卡班，你会选：',
+        options: [
+          { text: '格兰芬多宝剑——即使在绝望中也要反抗', house: 'gryffindor' },
+          { text: '家人的照片——爱和回忆是最后的温暖', house: 'hufflepuff' },
+          { text: '一本魔法书——知识是越狱的唯一希望', house: 'ravenclaw' },
+          { text: '复方汤剂配方——换个身份就能重获自由', house: 'slytherin' },
+        ],
+      },
+    ];
   </script>
 </body>
 </html>
