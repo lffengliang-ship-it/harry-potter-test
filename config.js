@@ -20,3 +20,8 @@ export const HOUSE_COLORS = {
   ravenclaw: { primary: '#0e1a40', secondary: '#946b2d', name: '拉文克劳' },
   slytherin: { primary: '#1a472a', secondary: '#aaaaaa', name: '斯莱特林' },
 };
+
+// 获取角色图片路径
+export function getCharacterImage(characterId) {
+  return CHARACTER_IMAGES[characterId] || '';
+}

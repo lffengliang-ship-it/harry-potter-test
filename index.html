@@ -64,6 +64,45 @@
       text-align: left; font-family: inherit; font-size: 1rem;
     }
     .option-btn:hover { background: rgba(255,255,255,0.1); border-color: #ffd700; }
+    .result-house {
+      font-size: 1.5rem; font-weight: bold;
+      margin-bottom: 16px; letter-spacing: 4px;
+    }
+    .character-image {
+      width: 200px; height: 250px; margin: 0 auto 16px;
+      border-radius: 12px; overflow: hidden;
+      background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .character-image img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .character-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05));
+      font-size: 4rem; color: #ffd700;
+    }
+    .character-name { font-size: 1.8rem; color: #ffd700; margin-bottom: 4px; }
+    .character-title { font-size: 0.95rem; color: #b0b0b0; margin-bottom: 24px; }
+    .result-details { text-align: left; margin: 24px 0; }
+    .detail-section { margin-bottom: 20px; }
+    .detail-section h3 {
+      font-size: 1rem; color: #ffd700;
+      margin-bottom: 8px; border-left: 3px solid #ffd700;
+      padding-left: 10px;
+    }
+    .traits { display: flex; flex-wrap: wrap; gap: 8px; }
+    .trait-tag {
+      padding: 4px 12px; background: rgba(255,215,0,0.1);
+      border: 1px solid rgba(255,215,0,0.3);
+      border-radius: 16px; font-size: 0.85rem; color: #ffd700;
+    }
+    .magic-text { font-size: 0.95rem; line-height: 1.6; color: #d0d0d0; }
+    .story-text {
+      font-size: 0.95rem; line-height: 1.8; color: #c0c0c0;
+      text-indent: 2em;
+    }
     .option-label {
       width: 32px; height: 32px; border-radius: 50%;
       background: rgba(255,215,0,0.2); color: #ffd700;
@@ -96,7 +135,7 @@
 
   <script type="module">
     // 导入配置模块（后续任务会用到）
-    import { HOUSE_COLORS, CHARACTER_IMAGES } from './config.js';
+    import { HOUSE_COLORS, getCharacterImage } from './config.js';
     console.log('Config loaded successfully');
 
     function startQuiz() {
@@ -341,6 +380,61 @@
 
     // 暴露到全局以便控制台验证
     window.CHARACTERS = CHARACTERS;
+
+    function showResult() {
+      const result = getResult();
+      const houseConfig = HOUSE_COLORS[result.house];
+      const char = result.character;
+
+      const container = document.getElementById('result-screen');
+      container.innerHTML = `
+        <div class="result-house" style="color: ${houseConfig.secondary}">
+          ${houseConfig.name}
+        </div>
+        <div class="result-character">
+          <div class="character-image">
+            <img src="${getCharacterImage(char.id)}"
+                 alt="${char.name}"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="character-placeholder" style="display:none">
+              <span>${char.name[0]}</span>
+            </div>
+          </div>
+          <h2 class="character-name">${char.name}</h2>
+          <p class="character-title">${char.title}</p>
+        </div>
+        <div class="result-details">
+          <div class="detail-section">
+            <h3>性格特点</h3>
+            <div class="traits">
+              ${char.traits.map(t => `<span class="trait-tag">${t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="detail-section">
+            <h3>擅长魔法</h3>
+            <p class="magic-text">${char.magic}</p>
+          </div>
+          <div class="detail-section story-section">
+            <h3>魔法世界名场面</h3>
+            <p class="story-text">${char.story}</p>
+          </div>
+        </div>
+        <button class="btn" onclick="restartQuiz()">再测一次</button>
+      `;
+
+      document.getElementById('quiz-screen').classList.remove('active');
+      document.getElementById('result-screen').classList.add('active');
+    }
+
+    function restartQuiz() {
+      currentQuestion = 0;
+      scores = { gryffindor: 0, hufflepuff: 0, ravenclaw: 0, slytherin: 0 };
+      answers = [];
+      document.getElementById('result-screen').classList.remove('active');
+      document.getElementById('start-screen').classList.add('active');
+    }
+
+    window.restartQuiz = restartQuiz;
   </script>
 </body>
 </html>
