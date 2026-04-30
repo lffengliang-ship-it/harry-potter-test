@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>霍格沃茨学院分院测试</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', 'Noto Serif SC', serif;
+      background: #1a1a2e;
+      color: #e8e8e8;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+    .screen { display: none; }
+    .screen.active { display: block; animation: fadeIn 0.6s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 { font-size: 2rem; margin-bottom: 16px; color: #ffd700; }
+    .subtitle { font-size: 1rem; color: #b0b0b0; margin-bottom: 32px; line-height: 1.6; }
+    .btn {
+      display: inline-block;
+      padding: 14px 40px;
+      background: #740001;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+    .btn:hover { background: #9a0001; transform: scale(1.02); }
+    .houses { display: flex; justify-content: center; gap: 12px; margin: 24px 0; }
+    .house-icon {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; font-weight: bold;
+    }
+    .gryffindor { background: #740001; color: #ffd700; }
+    .hufflepuff { background: #ecb939; color: #372e29; }
+    .ravenclaw { background: #0e1a40; color: #946b2d; }
+    .slytherin { background: #1a472a; color: #aaaaaa; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 首屏 -->
+    <div id="start-screen" class="screen active">
+      <h1>霍格沃茨分院测试</h1>
+      <p class="subtitle">穿越九又四分之三站台，<br>测测你属于哪个学院，最像哪位巫师</p>
+      <div class="houses">
+        <div class="house-icon gryffindor">G</div>
+        <div class="house-icon hufflepuff">H</div>
+        <div class="house-icon ravenclaw">R</div>
+        <div class="house-icon slytherin">S</div>
+      </div>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+    </div>
+
+    <!-- 题目屏 -->
+    <div id="quiz-screen" class="screen"></div>
+
+    <!-- 结果屏 -->
+    <div id="result-screen" class="screen"></div>
+  </div>
+
+  <script type="module">
+    // 导入配置模块（后续任务会用到）
+    import { HOUSE_COLORS } from './config.js';
+
+    function startQuiz() {
+      document.getElementById('start-screen').classList.remove('active');
+      document.getElementById('quiz-screen').classList.add('active');
+    }
+    window.startQuiz = startQuiz;
+  </script>
+</body>
+</html>
