@@ -52,6 +52,24 @@
     .hufflepuff { background: #ecb939; color: #372e29; }
     .ravenclaw { background: #0e1a40; color: #946b2d; }
     .slytherin { background: #1a472a; color: #aaaaaa; }
+    .progress { color: #ffd700; font-size: 0.9rem; margin-bottom: 16px; }
+    .question { font-size: 1.2rem; line-height: 1.6; margin-bottom: 24px; }
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option-btn {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px; background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; color: #e8e8e8;
+      cursor: pointer; transition: all 0.3s ease;
+      text-align: left; font-family: inherit; font-size: 1rem;
+    }
+    .option-btn:hover { background: rgba(255,255,255,0.1); border-color: #ffd700; }
+    .option-label {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(255,215,0,0.2); color: #ffd700;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: bold; flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -84,6 +102,7 @@
     function startQuiz() {
       document.getElementById('start-screen').classList.remove('active');
       document.getElementById('quiz-screen').classList.add('active');
+      renderQuestion();
     }
     window.startQuiz = startQuiz;
 
@@ -255,6 +274,70 @@
         },
       ],
     };
+
+    // 答题状态
+    let currentQuestion = 0;
+    let scores = { gryffindor: 0, hufflepuff: 0, ravenclaw: 0, slytherin: 0 };
+    let answers = [];
+
+    function renderQuestion() {
+      const q = QUESTIONS[currentQuestion];
+      const container = document.getElementById('quiz-screen');
+      container.innerHTML = `
+        <div class="progress">${currentQuestion + 1} / ${QUESTIONS.length}</div>
+        <h2 class="question">${q.question}</h2>
+        <div class="options">
+          ${q.options.map((opt, idx) => `
+            <button class="option-btn" onclick="selectAnswer('${opt.house}', ${idx})">
+              <span class="option-label">${String.fromCharCode(65 + idx)}</span>
+              <span class="option-text">${opt.text}</span>
+            </button>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function selectAnswer(house, optionIndex) {
+      scores[house]++;
+      answers.push({ question: currentQuestion, house, optionIndex });
+      currentQuestion++;
+
+      if (currentQuestion < QUESTIONS.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function getResult() {
+      // 找出最高分学院（平局时按用户答题记录中第一个出现的最高分学院获胜）
+      const entries = Object.entries(scores);
+      entries.sort((a, b) => b[1] - a[1]);
+      const maxScore = entries[0][1];
+
+      // 找到所有最高分的学院
+      const topHouses = entries.filter(e => e[1] === maxScore).map(e => e[0]);
+
+      // 平局处理：按用户答题时第一次选择该学院的顺序优先
+      let topHouse = topHouses[0];
+      if (topHouses.length > 1) {
+        // 遍历用户的答题记录，找到第一个属于topHouses的学院
+        for (const answer of answers) {
+          if (topHouses.includes(answer.house)) {
+            topHouse = answer.house;
+            break;
+          }
+        }
+      }
+
+      // 在该学院中随机选一个角色
+      const houseCharacters = CHARACTERS[topHouse];
+      const character = houseCharacters[Math.floor(Math.random() * houseCharacters.length)];
+
+      return { house: topHouse, character, scores };
+    }
+
+    window.selectAnswer = selectAnswer;
 
     // 暴露到全局以便控制台验证
     window.CHARACTERS = CHARACTERS;
