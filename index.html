@@ -455,7 +455,7 @@
     function shareResult() {
       const result = getResult();
       const text = `我在霍格沃茨分院测试中属于${HOUSE_COLORS[result.house].name}，最像${result.character.name}！`;
-      const url = 'https://你的用户名.github.io/harry-potter-test/';
+      const url = 'https://lffengliang-ship-it.github.io/harry-potter-test/';
 
       if (navigator.share) {
         navigator.share({ title: '霍格沃茨分院测试', text: text + ' ' + url }).catch(() => {});
