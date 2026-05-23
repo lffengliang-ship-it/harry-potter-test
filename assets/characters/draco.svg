@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-label="Draco Malfoy">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#0f2b1b"/>
+      <stop offset="1" stop-color="#c7c7c7"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="400" cy="318" r="152" fill="#efd0a3"/>
+  <path d="M245 260c18-99 88-148 156-148 82 0 143 52 158 146-113-29-203-29-314 2z" fill="#e8d68b"/>
+  <path d="M212 765c38-214 124-323 188-323 75 0 160 112 198 323z" fill="#1a472a"/>
+  <path d="M255 765h290l-145 128z" fill="#d8d8d8" opacity=".9"/>
+  <text x="400" y="886" text-anchor="middle" font-family="Georgia, serif" font-size="78" fill="#f4f4f4">DRACO</text>
+</svg>

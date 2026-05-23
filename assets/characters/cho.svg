@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-label="Cho Chang">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#10214a"/>
+      <stop offset="1" stop-color="#8f6a2f"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <circle cx="400" cy="320" r="150" fill="#f1c48f"/>
+  <path d="M235 325c16-122 89-194 170-194 94 0 164 69 173 190-51-55-97-83-174-83-73 0-126 28-169 87z" fill="#1f1b24"/>
+  <path d="M210 760c35-210 126-318 191-318 72 0 163 111 199 318z" fill="#0e1a40"/>
+  <path d="M245 760h310l-155 142z" fill="#946b2d" opacity=".85"/>
+  <text x="400" y="885" text-anchor="middle" font-family="Georgia, serif" font-size="92" fill="#f6df9f">CHO</text>
+</svg>

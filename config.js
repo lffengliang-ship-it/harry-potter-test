@@ -8,9 +8,9 @@ export const CHARACTER_IMAGES = {
   newt: 'assets/characters/newt.jpg',
   cedric: 'assets/characters/cedric.jpg',
   luna: 'assets/characters/luna.jpg',
-  cho: 'assets/characters/cho.jpg',
-  snape: 'assets/characters/snape.jpg',
-  draco: 'assets/characters/draco.jpg',
+  cho: 'assets/characters/cho.svg',
+  snape: 'assets/characters/snape.svg',
+  draco: 'assets/characters/draco.svg',
 };
 
 // 学院颜色配置
