@@ -941,17 +941,46 @@
     }
     window.nativeShareResult = nativeShareResult;
 
-    function copyShareLink() {
+    async function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (error) {
+          // Fall back to the textarea method below when browser permissions block Clipboard API.
+        }
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.top = '-9999px';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (error) {
+        copied = false;
+      }
+      document.body.removeChild(textarea);
+      return copied;
+    }
+
+    async function copyShareLink() {
       const payload = getSharePayload();
       const status = document.getElementById('share-summary');
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(payload.url)
-          .then(() => {
-            if (status) status.textContent = '测试链接已复制，可以直接发给朋友了。';
-          })
-          .catch(() => alert('复制失败，请手动复制链接：https://pjhp.afeng.click/'));
+      const copied = await copyText(payload.url);
+      if (copied && status) {
+        status.textContent = `测试链接已复制：${payload.url}`;
+      } else if (status) {
+        status.textContent = `复制失败，请长按复制：${payload.url}`;
       } else {
-        alert('请手动复制链接：https://pjhp.afeng.click/');
+        alert(`复制失败，请手动复制链接：${payload.url}`);
       }
     }
     window.copyShareLink = copyShareLink;
