@@ -77,6 +77,50 @@
       text-transform: uppercase;
     }
     .subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+    .letter-card {
+      position: relative;
+      margin: 0 auto 24px;
+      padding: 28px 22px;
+      border-radius: 10px;
+      background:
+        linear-gradient(135deg, rgba(255, 246, 208, 0.96), rgba(211, 175, 103, 0.9)),
+        #f2dca2;
+      color: #2f2118;
+      box-shadow: inset 0 0 0 1px rgba(90, 58, 20, 0.25), 0 22px 48px rgba(0,0,0,0.28);
+      text-align: left;
+    }
+    .letter-card::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(90, 58, 20, 0.24);
+      pointer-events: none;
+    }
+    .letter-title {
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+    }
+    .letter-body {
+      font-size: 0.98rem;
+      line-height: 1.8;
+    }
+    .wax-seal {
+      width: 66px;
+      height: 66px;
+      margin: 20px auto -4px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 35% 28%, #b71d1d, #740001 70%);
+      color: #f6d77b;
+      font-size: 1.55rem;
+      font-weight: bold;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.28), 0 8px 18px rgba(116,0,1,0.28);
+    }
     .btn {
       display: inline-block;
       padding: 14px 28px;
@@ -131,6 +175,13 @@
       transition: width 0.3s ease;
     }
     .question { font-size: 1.2rem; line-height: 1.6; margin-bottom: 24px; }
+    .question-scene {
+      color: #f1e7cf;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 22px;
+      text-align: left;
+    }
     .options { display: flex; flex-direction: column; gap: 12px; }
     .option-btn {
       display: flex; align-items: center; gap: 12px;
@@ -164,6 +215,46 @@
     }
     .character-name { font-size: 1.8rem; color: var(--gold); margin-bottom: 4px; }
     .character-title { font-size: 0.95rem; color: var(--muted); margin-bottom: 24px; }
+    .verdict-card {
+      text-align: left;
+      padding: 18px;
+      border-radius: 12px;
+      background: rgba(244,210,106,0.08);
+      border: 1px solid rgba(244,210,106,0.2);
+      margin: 20px 0;
+    }
+    .verdict-label {
+      color: var(--gold);
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+    .verdict-text {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: #fff7df;
+    }
+    .spell-card {
+      margin: 18px 0;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(14, 26, 64, 0.42);
+      border: 1px solid rgba(244,210,106,0.18);
+      text-align: center;
+    }
+    .spell-word {
+      display: block;
+      color: var(--gold);
+      font-size: 1.45rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .spell-pronunciation,
+    .spell-meaning {
+      display: block;
+      color: #eee1c8;
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
     .result-details { text-align: left; margin: 24px 0; }
     .detail-section { margin-bottom: 20px; }
     .detail-section h3 {
@@ -212,8 +303,16 @@
     <!-- 首屏 -->
     <div id="start-screen" class="screen active">
       <p class="eyebrow">Hogwarts Sorting Test</p>
-      <h1>霍格沃茨分院测试</h1>
-      <p class="subtitle">穿过九又四分之三站台，分院帽将根据你的 8 次选择，判断你属于哪个学院，最像哪位巫师。</p>
+      <h1>霍格沃茨入学通知</h1>
+      <div class="letter-card" aria-label="霍格沃茨入学通知书">
+        <div class="letter-title">HOGWARTS SCHOOL OF WITCHCRAFT AND WIZARDRY</div>
+        <p class="letter-body">
+          亲爱的年轻巫师：<br>
+          分院帽已经等候多时。请穿过九又四分之三站台，回答 8 个魔法世界里的选择。它会听见你真正的勇气、忠诚、智慧与野心，并把你送往命运所属的学院。
+        </p>
+        <div class="wax-seal">H</div>
+      </div>
+      <p class="subtitle">这不是一张普通问卷，而是一封通往霍格沃茨的邀请。</p>
       <div class="houses">
         <div class="house-icon gryffindor" title="格兰芬多">G</div>
         <div class="house-icon hufflepuff" title="赫奇帕奇">H</div>
@@ -247,82 +346,82 @@
     const QUESTIONS = [
       {
         id: 1,
-        question: '你在霍格沃茨的走廊里听到奇怪的声音，像是有人在哭泣。你会：',
+        question: '深夜的霍格沃茨走廊只剩下画像的低语。盥洗室方向传来压低的哭声，火把忽明忽暗。你会：',
         options: [
-          { text: '立刻冲过去查看，哪怕可能有危险', house: 'gryffindor' },
-          { text: '先去叫上朋友，一起去看看', house: 'hufflepuff' },
-          { text: '躲在暗处观察，分析声音来源和原因', house: 'ravenclaw' },
-          { text: '判断这件事对自己有没有好处，再决定', house: 'slytherin' },
+          { text: '立刻推门进去，先确认里面的人是否安全', house: 'gryffindor' },
+          { text: '回公共休息室叫上最信任的朋友一起去', house: 'hufflepuff' },
+          { text: '先观察门缝、脚印和声音，判断发生了什么', house: 'ravenclaw' },
+          { text: '记住这个秘密地点，等更合适的时机再处理', house: 'slytherin' },
         ],
       },
       {
         id: 2,
-        question: '魔药课上，你的坩埚突然爆炸，斯内普教授冷冷看着你。你会：',
+        question: '魔药课上，坩埚冒出不该出现的银绿色烟雾。斯内普教授停下脚步，整个教室都安静了。你会：',
         options: [
-          { text: '承认错误，但内心不服输，下次一定做好', house: 'gryffindor' },
-          { text: '诚恳道歉，主动清理，并向同学求助', house: 'hufflepuff' },
-          { text: '立刻回忆配方步骤，找出爆炸的化学原理', house: 'ravenclaw' },
-          { text: '观察教授表情，判断他是真生气还是在试探', house: 'slytherin' },
+          { text: '站出来承认是自己下错了材料，准备接受扣分', house: 'gryffindor' },
+          { text: '先护住旁边同学，再低声请求重新来过', house: 'hufflepuff' },
+          { text: '立刻回忆火候和顺序，找出烟雾变色的原因', house: 'ravenclaw' },
+          { text: '观察教授反应，判断他更在意错误还是态度', house: 'slytherin' },
         ],
       },
       {
         id: 3,
-        question: '你发现了一个可以进入禁林的秘密通道，你会：',
+        question: '海格的小屋外传来奇怪的低吼。禁林边缘有一串新鲜脚印，像是某种受伤的神奇动物留下的。你会：',
         options: [
-          { text: '今晚就去探险！危险才刺激', house: 'gryffindor' },
-          { text: '先告诉信任的朋友，征得同意一起去', house: 'hufflepuff' },
-          { text: '研究地图和书籍，制定详细计划再去', house: 'ravenclaw' },
-          { text: '评估里面的资源和风险，准备充分后独自前往', house: 'slytherin' },
+          { text: '握紧魔杖跟进去，至少不能让它独自流血', house: 'gryffindor' },
+          { text: '先找海格，他一定知道怎么不伤害它', house: 'hufflepuff' },
+          { text: '记录脚印形状，回图书馆查它属于哪种生物', house: 'ravenclaw' },
+          { text: '准备好退路和照明咒，再选择是否进入禁林', house: 'slytherin' },
         ],
       },
       {
         id: 4,
-        question: '魁地奇选拔赛上，你的朋友和对手发生激烈冲突，你会：',
+        question: '魁地奇球场上，游走球突然失控，直直冲向你的队友。看台上的欢呼声一下子变成尖叫。你会：',
         options: [
-          { text: '直接站出来替朋友出头，不管对手多强', house: 'gryffindor' },
-          { text: '调解冲突，努力让双方都冷静下来', house: 'hufflepuff' },
-          { text: '分析规则，找出对己方最有利的解决方案', house: 'ravenclaw' },
-          { text: '利用冲突制造机会，让自己获得上场资格', house: 'slytherin' },
+          { text: '冲过去挡开游走球，哪怕自己会摔下扫帚', house: 'gryffindor' },
+          { text: '提醒全队散开，同时飞向队友身边支援', house: 'hufflepuff' },
+          { text: '判断游走球轨迹，用最小动作把它引开', house: 'ravenclaw' },
+          { text: '抓住混乱瞬间改变位置，让局势转向有利', house: 'slytherin' },
         ],
       },
       {
         id: 5,
-        question: '期末考试前一周，你最可能：',
+        question: '乌姆里奇贴出了新的禁令，防御术练习被彻底禁止。有人悄悄邀请你加入一个秘密训练小组。你会：',
         options: [
-          { text: '临时抱佛脚，但相信直觉和勇气能过关', house: 'gryffindor' },
-          { text: '按部就班复习，每天固定时间学习', house: 'hufflepuff' },
-          { text: '整理知识体系，制作思维导图和笔记', house: 'ravenclaw' },
-          { text: '找到往年考题，分析出题规律，针对性准备', house: 'slytherin' },
+          { text: '加入。真正的防御术不能只停在课本上', house: 'gryffindor' },
+          { text: '加入，但先确认大家都明白风险、不会互相出卖', house: 'hufflepuff' },
+          { text: '加入，并负责整理咒语笔记和练习方法', house: 'ravenclaw' },
+          { text: '先观察组织者是否可靠，再决定要不要参与', house: 'slytherin' },
         ],
       },
       {
         id: 6,
-        question: '有人散布关于你的恶意谣言，全校都在议论。你会：',
+        question: '你发现一位朋友被同学误解，礼堂里到处都是窃窃私语。朋友低着头，假装自己没听见。你会：',
         options: [
-          { text: '当众 confront 造谣者，正面硬刚', house: 'gryffindor' },
-          { text: '找信任的人倾诉，用行动证明自己', house: 'hufflepuff' },
-          { text: '调查谣言源头，收集证据理性反击', house: 'ravenclaw' },
-          { text: '观察谁信了谣言，谁是可利用的盟友', house: 'slytherin' },
+          { text: '当众替朋友说话，让造谣的人把话讲清楚', house: 'gryffindor' },
+          { text: '坐到朋友身边，先让他知道自己不是一个人', house: 'hufflepuff' },
+          { text: '找到谣言源头，用事实一点点拆掉误会', house: 'ravenclaw' },
+          { text: '看清谁在推波助澜，再选择最有效的反击方式', house: 'slytherin' },
         ],
       },
       {
         id: 7,
-        question: '你获得了一个强大的魔法物品，但使用它可能有副作用。你会：',
+        question: '你在有求必应屋里发现一件强大的魔法物品。它能帮你赢，但你不确定它会不会留下代价。你会：',
         options: [
-          { text: '为了正义的目的使用它，承担后果', house: 'gryffindor' },
-          { text: '只在必要时使用，尽量保护自己和他人', house: 'hufflepuff' },
-          { text: '深入研究它的原理，找到安全使用的方法', house: 'ravenclaw' },
-          { text: '权衡利弊，在最关键的时刻用它达成目标', house: 'slytherin' },
+          { text: '如果能保护重要的人，就愿意承担后果', house: 'gryffindor' },
+          { text: '先问清楚它会不会伤害别人，再决定是否使用', house: 'hufflepuff' },
+          { text: '研究铭文、来源和限制，不弄懂绝不轻易使用', house: 'ravenclaw' },
+          { text: '把它留作最后底牌，只在关键时刻拿出来', house: 'slytherin' },
         ],
       },
       {
         id: 8,
-        question: '如果只能带一样东西进阿兹卡班，你会选：',
+        question: '摄魂怪逼近时，空气像结了冰。你必须在最黑暗的记忆里抓住一样东西，召唤自己的守护神。你会抓住：',
         options: [
-          { text: '格兰芬多宝剑——即使在绝望中也要反抗', house: 'gryffindor' },
-          { text: '家人的照片——爱和回忆是最后的温暖', house: 'hufflepuff' },
-          { text: '一本魔法书——知识是越狱的唯一希望', house: 'ravenclaw' },
-          { text: '复方汤剂配方——换个身份就能重获自由', house: 'slytherin' },
+          { text: '曾经站出来保护别人的那一刻', house: 'gryffindor' },
+          { text: '家人和朋友围在身边笑起来的声音', house: 'hufflepuff' },
+          { text: '第一次真正理解某个咒语时的光亮', house: 'ravenclaw' },
+          { text: '自己从绝境里翻盘、重新掌控局面的瞬间', house: 'slytherin' },
         ],
       },
     ];
@@ -411,6 +510,63 @@
       ],
     };
 
+    const RESULT_COPY = {
+      harry: {
+        verdict: '你不是不害怕。你只是会在害怕的时候，仍然走向该走的地方。',
+        spell: 'Expelliarmus',
+        pronunciation: '埃克斯-佩利-阿穆斯',
+        meaning: '除你武器：用最少的伤害，挡住最大的黑暗。',
+      },
+      hermione: {
+        verdict: '你的勇气藏在清醒里。别人凭直觉冲向前，你会把路照亮，再带大家一起走。',
+        spell: 'Protego',
+        pronunciation: '普罗-泰戈',
+        meaning: '盔甲护身：保护边界，也保护你在乎的人。',
+      },
+      ron: {
+        verdict: '你不是永远自信的人，但你会在朋友需要时回来。忠诚，是你最可靠的魔法。',
+        spell: 'Wingardium Leviosa',
+        pronunciation: '温加迪姆-勒维奥萨',
+        meaning: '漂浮咒：把沉重的时刻托起来。',
+      },
+      newt: {
+        verdict: '你看得见别人忽略的生命，也愿意为脆弱的东西停下脚步。',
+        spell: 'Revelio',
+        pronunciation: '瑞维利欧',
+        meaning: '显形咒：让隐藏的真相温柔地显现。',
+      },
+      cedric: {
+        verdict: '你相信公平不是口号，而是在胜利近在眼前时，仍然愿意伸出手。',
+        spell: 'Lumos',
+        pronunciation: '卢莫斯',
+        meaning: '荧光闪烁：在混乱里点亮体面与正直。',
+      },
+      luna: {
+        verdict: '你有一种安静的自由。世界觉得奇怪的地方，常常正是你看见真相的入口。',
+        spell: 'Expecto Patronum',
+        pronunciation: '艾克斯-派克托-帕特罗努姆',
+        meaning: '呼神护卫：召唤内心最不愿熄灭的光。',
+      },
+      cho: {
+        verdict: '你敏感，却并不脆弱。你会带着伤口继续选择，也会在下一次飞行里重新找到风。',
+        spell: 'Accio',
+        pronunciation: '阿奇欧',
+        meaning: '飞来咒：把失散的勇气重新召回身边。',
+      },
+      snape: {
+        verdict: '你很少解释自己。可真正重要的事，你会藏在沉默里守到最后。',
+        spell: 'Expecto Patronum',
+        pronunciation: '艾克斯-派克托-帕特罗努姆',
+        meaning: '呼神护卫：让一生的执念化成银色的守护。',
+      },
+      draco: {
+        verdict: '你不是没有野心，只是正在学会分辨：哪些胜利值得，哪些命令不必服从。',
+        spell: 'Protego',
+        pronunciation: '普罗-泰戈',
+        meaning: '盔甲护身：在家族、恐惧和自己之间立起边界。',
+      },
+    };
+
     // 答题状态
     let currentQuestion = 0;
     let scores = { gryffindor: 0, hufflepuff: 0, ravenclaw: 0, slytherin: 0 };
@@ -426,7 +582,7 @@
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="--progress: ${progress}%"></div>
         </div>
-        <h2 class="question">${q.question}</h2>
+        <h2 class="question question-scene">${q.question}</h2>
         <div class="options">
           ${q.options.map((opt, idx) => `
             <button class="option-btn" type="button" onclick="selectAnswer('${opt.house}', ${idx})">
@@ -488,11 +644,13 @@
       lastResult = result;
       const houseConfig = HOUSE_COLORS[result.house];
       const char = result.character;
+      const copy = RESULT_COPY[char.id];
 
       const container = document.getElementById('result-screen');
       container.innerHTML = `
+        <p class="eyebrow">The Sorting Hat Has Spoken</p>
         <div class="result-house" style="color: ${houseConfig.secondary}">
-          ${houseConfig.name}
+          分院帽的判词：${houseConfig.name}
         </div>
         <div class="result-character">
           <div class="character-image">
@@ -506,22 +664,34 @@
           <h2 class="character-name">${char.name}</h2>
           <p class="character-title">${char.title}</p>
         </div>
-        <div class="radar-chart">
-          <canvas id="radarCanvas" width="300" height="300"></canvas>
+
+        <div class="verdict-card">
+          <div class="verdict-label">你的魔法命运</div>
+          <p class="verdict-text">${copy.verdict}</p>
+        </div>
+
+        <div class="spell-card">
+          <span class="spell-word">${copy.spell}</span>
+          <span class="spell-pronunciation">读音：${copy.pronunciation}</span>
+          <span class="spell-meaning">${copy.meaning}</span>
+        </div>
+
+        <div class="radar-chart" aria-label="性格倾向雷达图">
+          <canvas id="radarCanvas" width="260" height="260"></canvas>
         </div>
         <div class="result-details">
           <div class="detail-section">
-            <h3>性格特点</h3>
+            <h3>分院帽看见了这些特质</h3>
             <div class="traits">
               ${char.traits.map(t => `<span class="trait-tag">${t}</span>`).join('')}
             </div>
           </div>
           <div class="detail-section">
-            <h3>擅长魔法</h3>
+            <h3>与这个角色相连的魔法</h3>
             <p class="magic-text">${char.magic}</p>
           </div>
           <div class="detail-section story-section">
-            <h3>魔法世界名场面</h3>
+            <h3>你抽中的名场面</h3>
             <p class="story-text">${char.story}</p>
           </div>
         </div>
@@ -549,7 +719,8 @@
 
     function shareResult() {
       const result = lastResult || getResult();
-      const text = `我在霍格沃茨分院测试中属于${HOUSE_COLORS[result.house].name}，最像${result.character.name}！`;
+      const copy = RESULT_COPY[result.character.id];
+      const text = `分院帽把我分到了${HOUSE_COLORS[result.house].name}，我最像${result.character.name}，专属咒语是 ${copy.spell}（${copy.pronunciation}）。`;
       const url = 'https://pjhp.afeng.click/';
 
       if (navigator.share) {
