@@ -3,35 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="8 道魔法世界情境题，测测你属于霍格沃茨哪个学院，最像哪位巫师。">
+  <meta property="og:title" content="霍格沃茨学院分院测试">
+  <meta property="og:description" content="穿过九又四分之三站台，看看分院帽会把你送往哪里。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://pjhp.afeng.click/">
+  <meta name="theme-color" content="#171326">
   <title>霍格沃茨学院分院测试</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #f4d26a;
+      --gold-soft: rgba(244, 210, 106, 0.18);
+      --ink: #f7f0dd;
+      --muted: #ddd3c0;
+      --panel: rgba(18, 16, 29, 0.94);
+      --panel-border: rgba(244, 210, 106, 0.24);
+    }
     body {
       font-family: 'Georgia', 'Noto Serif SC', serif;
-      background: #1a1a2e;
-      color: #e8e8e8;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(116, 0, 1, 0.36), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(14, 26, 64, 0.42), transparent 32%),
+        linear-gradient(135deg, #121022 0%, #201428 54%, #101927 100%);
+      color: var(--ink);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 78%);
     }
     .container {
-      max-width: 480px;
+      max-width: 520px;
       width: 100%;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
-    .screen { display: none; opacity: 0; }
+    .screen {
+      display: none;
+      opacity: 0;
+      padding: 28px;
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      background: var(--panel);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(18px);
+    }
     .screen.active { display: block; animation: fadeIn 0.5s ease forwards; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    h1 { font-size: 2rem; margin-bottom: 16px; color: #ffd700; }
-    .subtitle { font-size: 1rem; color: #b0b0b0; margin-bottom: 32px; line-height: 1.6; }
+    h1 { font-size: 2.25rem; margin-bottom: 16px; color: var(--gold); }
+    .eyebrow {
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
     .btn {
       display: inline-block;
-      padding: 14px 40px;
+      padding: 14px 28px;
       background: #740001;
       color: #fff;
       border: none;
@@ -41,29 +89,59 @@
       transition: all 0.3s ease;
       font-family: inherit;
     }
-    .btn:hover { background: #9a0001; transform: scale(1.02); }
+    .btn:hover { background: #9a0001; transform: translateY(-1px); }
+    .btn:focus-visible,
+    .option-btn:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .btn.secondary { background: #0e1a40; }
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
     .houses { display: flex; justify-content: center; gap: 12px; margin: 24px 0; }
     .house-icon {
-      width: 48px; height: 48px; border-radius: 50%;
+      width: 52px; height: 52px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.5rem; font-weight: bold;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.24);
     }
     .gryffindor { background: #740001; color: #ffd700; }
     .hufflepuff { background: #ecb939; color: #372e29; }
     .ravenclaw { background: #0e1a40; color: #946b2d; }
     .slytherin { background: #1a472a; color: #aaaaaa; }
-    .progress { color: #ffd700; font-size: 0.9rem; margin-bottom: 16px; }
+    .progress { color: var(--gold); font-size: 0.9rem; margin-bottom: 10px; }
+    .progress-track {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .progress-fill {
+      height: 100%;
+      width: var(--progress);
+      border-radius: inherit;
+      background: linear-gradient(90deg, #740001, var(--gold));
+      transition: width 0.3s ease;
+    }
     .question { font-size: 1.2rem; line-height: 1.6; margin-bottom: 24px; }
     .options { display: flex; flex-direction: column; gap: 12px; }
     .option-btn {
       display: flex; align-items: center; gap: 12px;
-      padding: 16px; background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      width: 100%;
+      padding: 16px; background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 12px; color: #e8e8e8;
       cursor: pointer; transition: all 0.3s ease;
       text-align: left; font-family: inherit; font-size: 1rem;
     }
-    .option-btn:hover { background: rgba(255,255,255,0.1); border-color: #ffd700; }
+    .option-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); transform: translateY(-1px); }
     .result-house {
       font-size: 1.5rem; font-weight: bold;
       margin-bottom: 16px; letter-spacing: 4px;
@@ -73,6 +151,7 @@
       border-radius: 12px; overflow: hidden;
       background: rgba(255,255,255,0.05);
       display: flex; align-items: center; justify-content: center;
+      border: 1px solid var(--panel-border);
     }
     .character-image img {
       width: 100%; height: 100%; object-fit: cover;
@@ -80,38 +159,40 @@
     .character-placeholder {
       width: 100%; height: 100%;
       display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,215,0,0.05));
-      font-size: 4rem; color: #ffd700;
+      background: linear-gradient(135deg, rgba(244,210,106,0.18), rgba(116,0,1,0.16));
+      font-size: 4rem; color: var(--gold);
     }
-    .character-name { font-size: 1.8rem; color: #ffd700; margin-bottom: 4px; }
-    .character-title { font-size: 0.95rem; color: #b0b0b0; margin-bottom: 24px; }
+    .character-name { font-size: 1.8rem; color: var(--gold); margin-bottom: 4px; }
+    .character-title { font-size: 0.95rem; color: var(--muted); margin-bottom: 24px; }
     .result-details { text-align: left; margin: 24px 0; }
     .detail-section { margin-bottom: 20px; }
     .detail-section h3 {
-      font-size: 1rem; color: #ffd700;
-      margin-bottom: 8px; border-left: 3px solid #ffd700;
+      font-size: 1rem; color: var(--gold);
+      margin-bottom: 8px; border-left: 3px solid var(--gold);
       padding-left: 10px;
     }
     .traits { display: flex; flex-wrap: wrap; gap: 8px; }
     .trait-tag {
-      padding: 4px 12px; background: rgba(255,215,0,0.1);
-      border: 1px solid rgba(255,215,0,0.3);
-      border-radius: 16px; font-size: 0.85rem; color: #ffd700;
+      padding: 4px 12px; background: var(--gold-soft);
+      border: 1px solid rgba(244,210,106,0.36);
+      border-radius: 16px; font-size: 0.85rem; color: var(--gold);
     }
-    .magic-text { font-size: 0.95rem; line-height: 1.6; color: #d0d0d0; }
+    .magic-text { font-size: 0.95rem; line-height: 1.6; color: #e3ddcf; }
     .story-text {
-      font-size: 0.95rem; line-height: 1.8; color: #c0c0c0;
+      font-size: 0.95rem; line-height: 1.8; color: #e1dacd;
       text-indent: 2em;
     }
     .option-label {
       width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(255,215,0,0.2); color: #ffd700;
+      background: var(--gold-soft); color: var(--gold);
       display: flex; align-items: center; justify-content: center;
       font-weight: bold; flex-shrink: 0;
     }
     .radar-chart { margin: 20px 0; }
     .radar-chart canvas { max-width: 100%; }
     @media (max-width: 480px) {
+      body { padding: 14px; align-items: flex-start; }
+      .screen { padding: 22px 18px; border-radius: 12px; }
       h1 { font-size: 1.6rem; }
       .question { font-size: 1.05rem; }
       .option-btn { padding: 14px; }
@@ -119,6 +200,10 @@
       .character-name { font-size: 1.5rem; }
       .houses { gap: 8px; }
       .house-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+      .radar-chart { margin: 10px 0 14px; }
+      .radar-chart canvas { width: 240px; height: 240px; }
+      .btn { width: 100%; }
+      .actions { gap: 10px; }
     }
   </style>
 </head>
@@ -126,15 +211,16 @@
   <div class="container">
     <!-- 首屏 -->
     <div id="start-screen" class="screen active">
+      <p class="eyebrow">Hogwarts Sorting Test</p>
       <h1>霍格沃茨分院测试</h1>
-      <p class="subtitle">穿越九又四分之三站台，<br>测测你属于哪个学院，最像哪位巫师</p>
+      <p class="subtitle">穿过九又四分之三站台，分院帽将根据你的 8 次选择，判断你属于哪个学院，最像哪位巫师。</p>
       <div class="houses">
-        <div class="house-icon gryffindor">G</div>
-        <div class="house-icon hufflepuff">H</div>
-        <div class="house-icon ravenclaw">R</div>
-        <div class="house-icon slytherin">S</div>
+        <div class="house-icon gryffindor" title="格兰芬多">G</div>
+        <div class="house-icon hufflepuff" title="赫奇帕奇">H</div>
+        <div class="house-icon ravenclaw" title="拉文克劳">R</div>
+        <div class="house-icon slytherin" title="斯莱特林">S</div>
       </div>
-      <button class="btn" onclick="startQuiz()">开始测试</button>
+      <button class="btn" type="button" onclick="startQuiz()">开始测试</button>
     </div>
 
     <!-- 题目屏 -->
@@ -329,16 +415,21 @@
     let currentQuestion = 0;
     let scores = { gryffindor: 0, hufflepuff: 0, ravenclaw: 0, slytherin: 0 };
     let answers = [];
+    let lastResult = null;
 
     function renderQuestion() {
       const q = QUESTIONS[currentQuestion];
       const container = document.getElementById('quiz-screen');
+      const progress = Math.round((currentQuestion / QUESTIONS.length) * 100);
       container.innerHTML = `
         <div class="progress">${currentQuestion + 1} / ${QUESTIONS.length}</div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" style="--progress: ${progress}%"></div>
+        </div>
         <h2 class="question">${q.question}</h2>
         <div class="options">
           ${q.options.map((opt, idx) => `
-            <button class="option-btn" onclick="selectAnswer('${opt.house}', ${idx})">
+            <button class="option-btn" type="button" onclick="selectAnswer('${opt.house}', ${idx})">
               <span class="option-label">${String.fromCharCode(65 + idx)}</span>
               <span class="option-text">${opt.text}</span>
             </button>
@@ -394,6 +485,7 @@
 
     function showResult() {
       const result = getResult();
+      lastResult = result;
       const houseConfig = HOUSE_COLORS[result.house];
       const char = result.character;
 
@@ -433,8 +525,10 @@
             <p class="story-text">${char.story}</p>
           </div>
         </div>
-        <button class="btn" style="background: #0e1a40; margin-right: 10px;" onclick="shareResult()">分享结果</button>
-        <button class="btn" onclick="restartQuiz()">再测一次</button>
+        <div class="actions">
+          <button class="btn secondary" type="button" onclick="shareResult()">分享结果</button>
+          <button class="btn" type="button" onclick="restartQuiz()">再测一次</button>
+        </div>
       `;
 
       document.getElementById('quiz-screen').classList.remove('active');
@@ -446,6 +540,7 @@
       currentQuestion = 0;
       scores = { gryffindor: 0, hufflepuff: 0, ravenclaw: 0, slytherin: 0 };
       answers = [];
+      lastResult = null;
       document.getElementById('result-screen').classList.remove('active');
       document.getElementById('start-screen').classList.add('active');
     }
@@ -453,7 +548,7 @@
     window.restartQuiz = restartQuiz;
 
     function shareResult() {
-      const result = getResult();
+      const result = lastResult || getResult();
       const text = `我在霍格沃茨分院测试中属于${HOUSE_COLORS[result.house].name}，最像${result.character.name}！`;
       const url = 'https://pjhp.afeng.click/';
 
