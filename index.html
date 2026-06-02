@@ -17,15 +17,16 @@
       --gold-soft: rgba(244, 210, 106, 0.18);
       --ink: #f7f0dd;
       --muted: #ddd3c0;
-      --panel: rgba(18, 16, 29, 0.94);
-      --panel-border: rgba(244, 210, 106, 0.24);
+      --panel: rgba(50, 34, 38, 0.86);
+      --panel-border: rgba(219, 177, 102, 0.32);
     }
     body {
       font-family: 'Georgia', 'Noto Serif SC', serif;
       background:
-        radial-gradient(circle at 18% 12%, rgba(116, 0, 1, 0.36), transparent 30%),
-        radial-gradient(circle at 82% 18%, rgba(14, 26, 64, 0.42), transparent 32%),
-        linear-gradient(135deg, #121022 0%, #201428 54%, #101927 100%);
+        radial-gradient(circle at 22% 12%, rgba(219, 177, 102, 0.2), transparent 34%),
+        radial-gradient(circle at 80% 18%, rgba(74, 26, 33, 0.28), transparent 34%),
+        radial-gradient(circle at 48% 88%, rgba(58, 40, 45, 0.48), transparent 46%),
+        linear-gradient(140deg, #3a2026 0%, #2e202a 48%, #211f2f 100%);
       color: var(--ink);
       min-height: 100vh;
       display: flex;
@@ -41,9 +42,10 @@
       inset: 0;
       pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 44px 44px;
+        radial-gradient(circle, rgba(244,210,106,0.18) 1px, transparent 1.5px),
+        linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 92px 92px, 48px 48px, 48px 48px;
       mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 78%);
     }
     .container {
@@ -60,7 +62,7 @@
       border: 1px solid var(--panel-border);
       border-radius: 16px;
       background: var(--panel);
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
       backdrop-filter: blur(18px);
     }
     .screen.active { display: block; animation: fadeIn 0.5s ease forwards; }
@@ -76,26 +78,114 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
-    .subtitle { font-size: 1rem; color: var(--muted); margin-bottom: 28px; line-height: 1.7; }
+    .subtitle {
+      font-size: 1.04rem;
+      color: #f8e5bd;
+      margin-bottom: 28px;
+      line-height: 1.7;
+      text-shadow: 0 1px 18px rgba(244,210,106,0.16);
+    }
+    .letter-card {
+      position: relative;
+      margin: 0 auto 24px;
+      padding: 30px 24px;
+      border-radius: 16px;
+      background:
+        linear-gradient(rgba(76, 48, 23, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.22), transparent 38%),
+        linear-gradient(145deg, #f3ddb0, #dfbd78);
+      background-size: 100% 28px, auto, auto;
+      color: #2b2117;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.36), 0 26px 56px rgba(0,0,0,0.3);
+      text-align: left;
+      overflow: hidden;
+    }
+    .letter-card::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(82, 56, 26, 0.26);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    .letter-sparkle {
+      position: absolute;
+      color: rgba(35, 91, 64, 0.36);
+      font-size: 1.1rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .letter-sparkle.one { top: 24px; left: 24px; }
+    .letter-sparkle.two { top: 96px; right: 28px; color: rgba(116, 0, 1, 0.28); }
+    .letter-sparkle.three { bottom: 30px; left: 36px; color: rgba(82, 56, 26, 0.34); }
+    .letter-title {
+      text-align: center;
+      color: #244b36;
+      font-size: 0.9rem;
+      font-weight: bold;
+      letter-spacing: 0.18em;
+      margin-bottom: 26px;
+      line-height: 1.35;
+    }
+    .letter-body {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #263c2f;
+    }
+    .wax-seal {
+      width: auto;
+      height: auto;
+      margin: 22px auto -2px;
+      display: block;
+      text-align: center;
+      background: transparent;
+      color: #6d3f15;
+      border: 0;
+      font-size: 0.76rem;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: none;
+    }
+    .wax-seal::before,
+    .wax-seal::after {
+      content: "";
+      display: inline-block;
+      width: 38px;
+      height: 1px;
+      margin: 0 10px 4px;
+      background: rgba(36, 75, 54, 0.34);
+    }
     .btn {
       display: inline-block;
       padding: 14px 28px;
-      background: #740001;
-      color: #fff;
-      border: none;
+      background: linear-gradient(135deg, #b83338, #7b1019);
+      color: #fff7ef;
+      border: 1px solid rgba(244, 210, 106, 0.48);
       border-radius: 8px;
       font-size: 1.1rem;
+      font-weight: bold;
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: inherit;
+      box-shadow: 0 12px 30px rgba(123, 16, 25, 0.24);
     }
-    .btn:hover { background: #9a0001; transform: translateY(-1px); }
+    .btn:hover {
+      background: linear-gradient(135deg, #c94448, #8d1720);
+      border-color: rgba(244, 210, 106, 0.68);
+      transform: translateY(-1px);
+    }
     .btn:focus-visible,
     .option-btn:focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 3px;
     }
-    .btn.secondary { background: #0e1a40; }
+    .btn.secondary {
+      background: #0e1a40;
+      color: #fff;
+      border-color: rgba(255,255,255,0.14);
+      box-shadow: none;
+    }
     .actions {
       display: flex;
       justify-content: center;
@@ -105,16 +195,18 @@
     }
     .houses { display: flex; justify-content: center; gap: 12px; margin: 24px 0; }
     .house-icon {
-      width: 52px; height: 52px; border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem; font-weight: bold;
+      font-size: 1.25rem; font-weight: bold;
       border: 1px solid rgba(255,255,255,0.16);
       box-shadow: 0 8px 22px rgba(0,0,0,0.24);
     }
     .gryffindor { background: #740001; color: #ffd700; }
     .hufflepuff { background: #ecb939; color: #372e29; }
     .ravenclaw { background: #0e1a40; color: #946b2d; }
-    .slytherin { background: #1a472a; color: #aaaaaa; }
+    .slytherin { background: #1a472a; color: #d6d6d6; }
     .progress { color: var(--gold); font-size: 0.9rem; margin-bottom: 10px; }
     .progress-track {
       height: 6px;
@@ -131,6 +223,13 @@
       transition: width 0.3s ease;
     }
     .question { font-size: 1.2rem; line-height: 1.6; margin-bottom: 24px; }
+    .question-scene {
+      color: #f1e7cf;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      margin-bottom: 22px;
+      text-align: left;
+    }
     .options { display: flex; flex-direction: column; gap: 12px; }
     .option-btn {
       display: flex; align-items: center; gap: 12px;
@@ -146,15 +245,29 @@
       font-size: 1.5rem; font-weight: bold;
       margin-bottom: 16px; letter-spacing: 4px;
     }
+    .result-scene {
+      margin: 18px 0 22px;
+      padding: 0;
+      background: transparent;
+      border: 0;
+    }
     .character-image {
-      width: 200px; height: 250px; margin: 0 auto 16px;
-      border-radius: 12px; overflow: hidden;
-      background: rgba(255,255,255,0.05);
+      width: min(100%, 340px);
+      aspect-ratio: 3 / 4;
+      height: auto;
+      margin: 0 auto 16px;
+      border-radius: 10px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(244,210,106,0.12), transparent 52%),
+        rgba(255,255,255,0.04);
       display: flex; align-items: center; justify-content: center;
-      border: 1px solid var(--panel-border);
+      border: 0;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.24);
     }
     .character-image img {
       width: 100%; height: 100%; object-fit: cover;
+      object-position: center top;
     }
     .character-placeholder {
       width: 100%; height: 100%;
@@ -164,12 +277,45 @@
     }
     .character-name { font-size: 1.8rem; color: var(--gold); margin-bottom: 4px; }
     .character-title { font-size: 0.95rem; color: var(--muted); margin-bottom: 24px; }
-    .result-details { text-align: left; margin: 24px 0; }
+    .scene-caption {
+      color: #f5e8c8;
+      font-size: 1rem;
+      line-height: 1.75;
+      text-align: center;
+      max-width: 92%;
+      margin: 0 auto;
+    }
+    .spell-card {
+      margin: 24px 0 22px;
+      padding: 14px 0 16px;
+      border-radius: 0;
+      background: transparent;
+      border-top: 1px solid rgba(244,210,106,0.18);
+      border-bottom: 1px solid rgba(244,210,106,0.18);
+      text-align: center;
+    }
+    .spell-word {
+      display: block;
+      color: var(--gold);
+      font-size: 1.45rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .spell-pronunciation,
+    .spell-meaning {
+      display: block;
+      color: #eee1c8;
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+    .result-details { text-align: left; margin: 18px 0 24px; }
     .detail-section { margin-bottom: 20px; }
     .detail-section h3 {
       font-size: 1rem; color: var(--gold);
-      margin-bottom: 8px; border-left: 3px solid var(--gold);
-      padding-left: 10px;
+      margin-bottom: 10px;
+      border-left: 0;
+      padding-left: 0;
+      text-align: center;
     }
     .traits { display: flex; flex-wrap: wrap; gap: 8px; }
     .trait-tag {
@@ -181,6 +327,98 @@
     .story-text {
       font-size: 0.95rem; line-height: 1.8; color: #e1dacd;
       text-indent: 2em;
+    }
+    .share-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(8, 6, 12, 0.62);
+      backdrop-filter: blur(10px);
+    }
+    .share-panel.active { display: flex; }
+    .share-sheet {
+      width: min(100%, 460px);
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(45, 32, 40, 0.98);
+      border: 1px solid rgba(219, 177, 102, 0.28);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.36);
+      color: var(--ink);
+      text-align: left;
+    }
+    .share-sheet h3 {
+      color: var(--gold);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+    .share-sheet p {
+      color: #e8d8b8;
+      line-height: 1.6;
+      font-size: 0.94rem;
+      margin-bottom: 14px;
+    }
+    .share-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .share-option {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(244,210,106,0.24);
+      background: rgba(255,255,255,0.055);
+      color: #fff2d2;
+      font-family: inherit;
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+    }
+    .share-option:hover { background: rgba(255,255,255,0.09); }
+    .share-option small {
+      display: block;
+      margin-top: 4px;
+      color: #cfc0a2;
+      font-size: 0.82rem;
+    }
+    .share-close {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: 0;
+      background: transparent;
+      color: #d9c7a3;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .poster-preview {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(244,210,106,0.18);
+    }
+    .poster-preview.active { display: block; }
+    .poster-preview canvas {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(244,210,106,0.2);
+      background: #1f1720;
+      display: block;
+    }
+    .poster-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .poster-actions .share-option {
+      flex: 1;
+      width: auto;
+      text-align: center;
+      padding: 12px;
     }
     .option-label {
       width: 32px; height: 32px; border-radius: 50%;
@@ -196,10 +434,10 @@
       h1 { font-size: 1.6rem; }
       .question { font-size: 1.05rem; }
       .option-btn { padding: 14px; }
-      .character-image { width: 160px; height: 200px; }
+      .character-image { width: min(100%, 300px); }
       .character-name { font-size: 1.5rem; }
       .houses { gap: 8px; }
-      .house-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+      .house-icon { width: 42px; height: 42px; font-size: 1rem; }
       .radar-chart { margin: 10px 0 14px; }
       .radar-chart canvas { width: 240px; height: 240px; }
       .btn { width: 100%; }
@@ -212,8 +450,19 @@
     <!-- 首屏 -->
     <div id="start-screen" class="screen active">
       <p class="eyebrow">Hogwarts Sorting Test</p>
-      <h1>霍格沃茨分院测试</h1>
-      <p class="subtitle">穿过九又四分之三站台，分院帽将根据你的 8 次选择，判断你属于哪个学院，最像哪位巫师。</p>
+      <h1>霍格沃茨入学通知</h1>
+      <div class="letter-card" aria-label="霍格沃茨入学通知书">
+        <span class="letter-sparkle one">✦</span>
+        <span class="letter-sparkle two">✧</span>
+        <span class="letter-sparkle three">✦</span>
+        <div class="letter-title">HOGWARTS SCHOOL OF WITCHCRAFT AND WIZARDRY</div>
+        <p class="letter-body">
+          亲爱的年轻巫师：<br>
+          分院帽已经等候多时。请穿过九又四分之三站台，回答 8 个魔法世界里的选择。它会听见你真正的勇气、忠诚、智慧与野心，并把你送往命运所属的学院。
+        </p>
+        <div class="wax-seal">HOGWARTS</div>
+      </div>
+      <p class="subtitle">今晚，分院帽只问一个问题：当魔法世界真的站到你面前，你会怎样选择？</p>
       <div class="houses">
         <div class="house-icon gryffindor" title="格兰芬多">G</div>
         <div class="house-icon hufflepuff" title="赫奇帕奇">H</div>
@@ -230,6 +479,35 @@
     <div id="result-screen" class="screen"></div>
   </div>
 
+  <div id="share-panel" class="share-panel" role="dialog" aria-modal="true" aria-labelledby="share-title">
+    <div class="share-sheet">
+      <h3 id="share-title">分享你的分院结果</h3>
+      <p id="share-summary">选择一种方式，把分院帽的判词带给下一位巫师。</p>
+      <div class="share-options">
+        <button class="share-option" type="button" onclick="generatePoster()">
+          生成结果海报
+          <small>生成一张可保存的角色结果图</small>
+        </button>
+        <button class="share-option" type="button" onclick="nativeShareResult()">
+          调用系统分享
+          <small>适合微信、消息、社交平台</small>
+        </button>
+        <button class="share-option" type="button" onclick="copyShareLink()">
+          复制测试链接
+          <small>把链接发给朋友，让 TA 也来分院</small>
+        </button>
+      </div>
+      <div id="poster-preview" class="poster-preview">
+        <canvas id="poster-canvas" width="900" height="1350"></canvas>
+        <div class="poster-actions">
+          <button class="share-option" type="button" onclick="downloadPoster()">保存海报</button>
+          <button class="share-option" type="button" onclick="copyShareLink()">复制链接</button>
+        </div>
+      </div>
+      <button class="share-close" type="button" onclick="closeSharePanel()">暂时不了</button>
+    </div>
+  </div>
+
   <script type="module">
     // 导入配置模块（后续任务会用到）
     import { HOUSE_COLORS, getCharacterImage } from './config.js';
@@ -243,86 +521,86 @@
     window.startQuiz = startQuiz;
 
     // 题库：8 道情境选择题
-    // 每题 4 个选项，分别对应 G/H/R/S 四个学院
+    // 每题 4 个选项，分别对应学院与角色倾向
     const QUESTIONS = [
       {
         id: 1,
-        question: '你在霍格沃茨的走廊里听到奇怪的声音，像是有人在哭泣。你会：',
+        question: '深夜的霍格沃茨走廊只剩下画像的低语。盥洗室方向传来压低的哭声，火把忽明忽暗。你会：',
         options: [
-          { text: '立刻冲过去查看，哪怕可能有危险', house: 'gryffindor' },
-          { text: '先去叫上朋友，一起去看看', house: 'hufflepuff' },
-          { text: '躲在暗处观察，分析声音来源和原因', house: 'ravenclaw' },
-          { text: '判断这件事对自己有没有好处，再决定', house: 'slytherin' },
+          { text: '立刻推门进去，先确认里面的人是否安全', house: 'gryffindor', character: 'harry' },
+          { text: '回公共休息室叫上最信任的朋友一起去', house: 'hufflepuff', character: 'cedric' },
+          { text: '先观察门缝、脚印和声音，判断发生了什么', house: 'ravenclaw', character: 'luna' },
+          { text: '记住这个秘密地点，等更合适的时机再处理', house: 'slytherin', character: 'draco' },
         ],
       },
       {
         id: 2,
-        question: '魔药课上，你的坩埚突然爆炸，斯内普教授冷冷看着你。你会：',
+        question: '魔药课上，坩埚冒出不该出现的银绿色烟雾。斯内普教授停下脚步，整个教室都安静了。你会：',
         options: [
-          { text: '承认错误，但内心不服输，下次一定做好', house: 'gryffindor' },
-          { text: '诚恳道歉，主动清理，并向同学求助', house: 'hufflepuff' },
-          { text: '立刻回忆配方步骤，找出爆炸的化学原理', house: 'ravenclaw' },
-          { text: '观察教授表情，判断他是真生气还是在试探', house: 'slytherin' },
+          { text: '站出来承认是自己下错了材料，准备接受扣分', house: 'gryffindor', character: 'harry' },
+          { text: '先护住旁边同学，再低声请求重新来过', house: 'hufflepuff', character: 'newt' },
+          { text: '立刻回忆火候和顺序，找出烟雾变色的原因', house: 'ravenclaw', character: 'hermione' },
+          { text: '观察教授反应，判断他更在意错误还是态度', house: 'slytherin', character: 'snape' },
         ],
       },
       {
         id: 3,
-        question: '你发现了一个可以进入禁林的秘密通道，你会：',
+        question: '海格的小屋外传来奇怪的低吼。禁林边缘有一串新鲜脚印，像是某种受伤的神奇动物留下的。你会：',
         options: [
-          { text: '今晚就去探险！危险才刺激', house: 'gryffindor' },
-          { text: '先告诉信任的朋友，征得同意一起去', house: 'hufflepuff' },
-          { text: '研究地图和书籍，制定详细计划再去', house: 'ravenclaw' },
-          { text: '评估里面的资源和风险，准备充分后独自前往', house: 'slytherin' },
+          { text: '握紧魔杖跟进去，至少不能让它独自流血', house: 'gryffindor', character: 'harry' },
+          { text: '先找海格，他一定知道怎么不伤害它', house: 'hufflepuff', character: 'newt' },
+          { text: '记录脚印形状，回图书馆查它属于哪种生物', house: 'ravenclaw', character: 'luna' },
+          { text: '准备好退路和照明咒，再选择是否进入禁林', house: 'slytherin', character: 'draco' },
         ],
       },
       {
         id: 4,
-        question: '魁地奇选拔赛上，你的朋友和对手发生激烈冲突，你会：',
+        question: '魁地奇球场上，游走球突然失控，直直冲向你的队友。看台上的欢呼声一下子变成尖叫。你会：',
         options: [
-          { text: '直接站出来替朋友出头，不管对手多强', house: 'gryffindor' },
-          { text: '调解冲突，努力让双方都冷静下来', house: 'hufflepuff' },
-          { text: '分析规则，找出对己方最有利的解决方案', house: 'ravenclaw' },
-          { text: '利用冲突制造机会，让自己获得上场资格', house: 'slytherin' },
+          { text: '冲过去挡开游走球，哪怕自己会摔下扫帚', house: 'gryffindor', character: 'ron' },
+          { text: '提醒全队散开，同时飞向队友身边支援', house: 'hufflepuff', character: 'cedric' },
+          { text: '判断游走球轨迹，用最小动作把它引开', house: 'ravenclaw', character: 'cho' },
+          { text: '抓住混乱瞬间改变位置，让局势转向有利', house: 'slytherin', character: 'draco' },
         ],
       },
       {
         id: 5,
-        question: '期末考试前一周，你最可能：',
+        question: '乌姆里奇贴出了新的禁令，防御术练习被彻底禁止。有人悄悄邀请你加入一个秘密训练小组。你会：',
         options: [
-          { text: '临时抱佛脚，但相信直觉和勇气能过关', house: 'gryffindor' },
-          { text: '按部就班复习，每天固定时间学习', house: 'hufflepuff' },
-          { text: '整理知识体系，制作思维导图和笔记', house: 'ravenclaw' },
-          { text: '找到往年考题，分析出题规律，针对性准备', house: 'slytherin' },
+          { text: '加入。真正的防御术不能只停在课本上', house: 'gryffindor', character: 'harry' },
+          { text: '加入，但先确认大家都明白风险、不会互相出卖', house: 'hufflepuff', character: 'cedric' },
+          { text: '加入，并负责整理咒语笔记和练习方法', house: 'ravenclaw', character: 'hermione' },
+          { text: '先观察组织者是否可靠，再决定要不要参与', house: 'slytherin', character: 'snape' },
         ],
       },
       {
         id: 6,
-        question: '有人散布关于你的恶意谣言，全校都在议论。你会：',
+        question: '你发现一位朋友被同学误解，礼堂里到处都是窃窃私语。朋友低着头，假装自己没听见。你会：',
         options: [
-          { text: '当众 confront 造谣者，正面硬刚', house: 'gryffindor' },
-          { text: '找信任的人倾诉，用行动证明自己', house: 'hufflepuff' },
-          { text: '调查谣言源头，收集证据理性反击', house: 'ravenclaw' },
-          { text: '观察谁信了谣言，谁是可利用的盟友', house: 'slytherin' },
+          { text: '当众替朋友说话，让造谣的人把话讲清楚', house: 'gryffindor', character: 'ron' },
+          { text: '坐到朋友身边，先让他知道自己不是一个人', house: 'hufflepuff', character: 'newt' },
+          { text: '找到谣言源头，用事实一点点拆掉误会', house: 'ravenclaw', character: 'hermione' },
+          { text: '看清谁在推波助澜，再选择最有效的反击方式', house: 'slytherin', character: 'snape' },
         ],
       },
       {
         id: 7,
-        question: '你获得了一个强大的魔法物品，但使用它可能有副作用。你会：',
+        question: '你在有求必应屋里发现一件强大的魔法物品。它能帮你赢，但你不确定它会不会留下代价。你会：',
         options: [
-          { text: '为了正义的目的使用它，承担后果', house: 'gryffindor' },
-          { text: '只在必要时使用，尽量保护自己和他人', house: 'hufflepuff' },
-          { text: '深入研究它的原理，找到安全使用的方法', house: 'ravenclaw' },
-          { text: '权衡利弊，在最关键的时刻用它达成目标', house: 'slytherin' },
+          { text: '如果能保护重要的人，就愿意承担后果', house: 'gryffindor', character: 'harry' },
+          { text: '先问清楚它会不会伤害别人，再决定是否使用', house: 'hufflepuff', character: 'newt' },
+          { text: '研究铭文、来源和限制，不弄懂绝不轻易使用', house: 'ravenclaw', character: 'hermione' },
+          { text: '把它留作最后底牌，只在关键时刻拿出来', house: 'slytherin', character: 'draco' },
         ],
       },
       {
         id: 8,
-        question: '如果只能带一样东西进阿兹卡班，你会选：',
+        question: '摄魂怪逼近时，空气像结了冰。你必须在最黑暗的记忆里抓住一样东西，召唤自己的守护神。你会抓住：',
         options: [
-          { text: '格兰芬多宝剑——即使在绝望中也要反抗', house: 'gryffindor' },
-          { text: '家人的照片——爱和回忆是最后的温暖', house: 'hufflepuff' },
-          { text: '一本魔法书——知识是越狱的唯一希望', house: 'ravenclaw' },
-          { text: '复方汤剂配方——换个身份就能重获自由', house: 'slytherin' },
+          { text: '曾经站出来保护别人的那一刻', house: 'gryffindor', character: 'harry' },
+          { text: '家人和朋友围在身边笑起来的声音', house: 'hufflepuff', character: 'cedric' },
+          { text: '第一次真正理解某个咒语时的光亮', house: 'ravenclaw', character: 'luna' },
+          { text: '自己从绝境里翻盘、重新掌控局面的瞬间', house: 'slytherin', character: 'snape' },
         ],
       },
     ];
@@ -411,9 +689,88 @@
       ],
     };
 
+    const RESULT_COPY = {
+      harry: {
+        verdict: '你不是不害怕。你只是会在害怕的时候，仍然走向该走的地方。',
+        scene: '你站在黑暗和所有人之间，魔杖举起的那一刻，勇气不再是口号。',
+        spell: 'Expelliarmus',
+        pronunciation: '埃克斯-佩利-阿穆斯',
+        meaning: '除你武器：用最少的伤害，挡住最大的黑暗。',
+      },
+      hermione: {
+        verdict: '你的勇气藏在清醒里。别人凭直觉冲向前，你会把路照亮，再带大家一起走。',
+        scene: '你在混乱里翻开书页，找到那条别人忽略的路，然后把它变成大家的生路。',
+        spell: 'Protego',
+        pronunciation: '普罗-泰戈',
+        meaning: '盔甲护身：保护边界，也保护你在乎的人。',
+      },
+      ron: {
+        verdict: '你不是永远自信的人，但你会在朋友需要时回来。忠诚，是你最可靠的魔法。',
+        scene: '巨大的棋盘向前移动，你知道自己会倒下，但朋友必须继续走。',
+        spell: 'Wingardium Leviosa',
+        pronunciation: '温加迪姆-勒维奥萨',
+        meaning: '漂浮咒：把沉重的时刻托起来。',
+      },
+      newt: {
+        verdict: '你看得见别人忽略的生命，也愿意为脆弱的东西停下脚步。',
+        scene: '皮箱打开，另一个世界在里面呼吸。你不是征服它们的人，你是守护它们的人。',
+        spell: 'Revelio',
+        pronunciation: '瑞维利欧',
+        meaning: '显形咒：让隐藏的真相温柔地显现。',
+      },
+      cedric: {
+        verdict: '你相信公平不是口号，而是在胜利近在眼前时，仍然愿意伸出手。',
+        scene: '火焰杯近在眼前，你没有独自伸手，因为真正的胜利不该丢下同伴。',
+        spell: 'Lumos',
+        pronunciation: '卢莫斯',
+        meaning: '荧光闪烁：在混乱里点亮体面与正直。',
+      },
+      luna: {
+        verdict: '你有一种安静的自由。世界觉得奇怪的地方，常常正是你看见真相的入口。',
+        scene: '夜骐在风里展开翅膀。别人看不见的东西，你会安静地承认它存在。',
+        spell: 'Expecto Patronum',
+        pronunciation: '艾克斯-派克托-帕特罗努姆',
+        meaning: '呼神护卫：召唤内心最不愿熄灭的光。',
+      },
+      cho: {
+        verdict: '你敏感，却并不脆弱。你会带着伤口继续选择，也会在下一次飞行里重新找到风。',
+        scene: '扫帚掠过球场上空，风把眼泪吹干，也把你带回自己的方向。',
+        spell: 'Accio',
+        pronunciation: '阿奇欧',
+        meaning: '飞来咒：把失散的勇气重新召回身边。',
+      },
+      snape: {
+        verdict: '你很少解释自己。可真正重要的事，你会藏在沉默里守到最后。',
+        scene: '银色牝鹿穿过黑暗，所有未说出口的守护，都在这一刻现形。',
+        spell: 'Expecto Patronum',
+        pronunciation: '艾克斯-派克托-帕特罗努姆',
+        meaning: '呼神护卫：让一生的执念化成银色的守护。',
+      },
+      draco: {
+        verdict: '你不是没有野心，只是正在学会分辨：哪些胜利值得，哪些命令不必服从。',
+        scene: '天文塔的风吹得很冷。你举起魔杖，却第一次听见自己内心的迟疑。',
+        spell: 'Protego',
+        pronunciation: '普罗-泰戈',
+        meaning: '盔甲护身：在家族、恐惧和自己之间立起边界。',
+      },
+    };
+
+    const RESULT_ACCENTS = {
+      gryffindor: '#ffd76a',
+      hufflepuff: '#f4d26a',
+      ravenclaw: '#d8a85a',
+      slytherin: '#c9d8cf',
+    };
+
     // 答题状态
     let currentQuestion = 0;
     let scores = { gryffindor: 0, hufflepuff: 0, ravenclaw: 0, slytherin: 0 };
+    let characterScores = {
+      harry: 0, hermione: 0, ron: 0,
+      newt: 0, cedric: 0,
+      luna: 0, cho: 0,
+      snape: 0, draco: 0,
+    };
     let answers = [];
     let lastResult = null;
 
@@ -426,10 +783,10 @@
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="--progress: ${progress}%"></div>
         </div>
-        <h2 class="question">${q.question}</h2>
+        <h2 class="question question-scene">${q.question}</h2>
         <div class="options">
           ${q.options.map((opt, idx) => `
-            <button class="option-btn" type="button" onclick="selectAnswer('${opt.house}', ${idx})">
+            <button class="option-btn" type="button" onclick="selectAnswer('${opt.house}', '${opt.character}', ${idx})">
               <span class="option-label">${String.fromCharCode(65 + idx)}</span>
               <span class="option-text">${opt.text}</span>
             </button>
@@ -438,9 +795,10 @@
       `;
     }
 
-    function selectAnswer(house, optionIndex) {
+    function selectAnswer(house, characterId, optionIndex) {
       scores[house]++;
-      answers.push({ question: currentQuestion, house, optionIndex });
+      characterScores[characterId]++;
+      answers.push({ question: currentQuestion, house, characterId, optionIndex });
       currentQuestion++;
 
       if (currentQuestion < QUESTIONS.length) {
@@ -471,11 +829,12 @@
         }
       }
 
-      // 在该学院中随机选一个角色
       const houseCharacters = CHARACTERS[topHouse];
-      const character = houseCharacters[Math.floor(Math.random() * houseCharacters.length)];
+      const character = houseCharacters
+        .slice()
+        .sort((a, b) => characterScores[b.id] - characterScores[a.id])[0];
 
-      return { house: topHouse, character, scores };
+      return { house: topHouse, character, scores, characterScores };
     }
 
     window.selectAnswer = selectAnswer;
@@ -488,13 +847,16 @@
       lastResult = result;
       const houseConfig = HOUSE_COLORS[result.house];
       const char = result.character;
+      const copy = RESULT_COPY[char.id];
+      const accent = RESULT_ACCENTS[result.house] || houseConfig.secondary;
 
       const container = document.getElementById('result-screen');
       container.innerHTML = `
-        <div class="result-house" style="color: ${houseConfig.secondary}">
-          ${houseConfig.name}
+        <p class="eyebrow">The Sorting Hat Has Spoken</p>
+        <div class="result-house" style="color: ${accent}">
+          分院帽的判词：${houseConfig.name}
         </div>
-        <div class="result-character">
+        <div class="result-character result-scene">
           <div class="character-image">
             <img src="${getCharacterImage(char.id)}"
                  alt="${char.name}"
@@ -505,23 +867,18 @@
           </div>
           <h2 class="character-name">${char.name}</h2>
           <p class="character-title">${char.title}</p>
+          <p class="scene-caption">${copy.scene}</p>
         </div>
-        <div class="radar-chart">
-          <canvas id="radarCanvas" width="300" height="300"></canvas>
+
+        <div class="spell-card">
+          <span class="spell-word">${copy.spell}</span>
+          <span class="spell-pronunciation">读音：${copy.pronunciation}</span>
+          <span class="spell-meaning">${copy.meaning}</span>
         </div>
+
         <div class="result-details">
-          <div class="detail-section">
-            <h3>性格特点</h3>
-            <div class="traits">
-              ${char.traits.map(t => `<span class="trait-tag">${t}</span>`).join('')}
-            </div>
-          </div>
-          <div class="detail-section">
-            <h3>擅长魔法</h3>
-            <p class="magic-text">${char.magic}</p>
-          </div>
           <div class="detail-section story-section">
-            <h3>魔法世界名场面</h3>
+            <h3>你的角色时刻</h3>
             <p class="story-text">${char.story}</p>
           </div>
         </div>
@@ -533,12 +890,17 @@
 
       document.getElementById('quiz-screen').classList.remove('active');
       document.getElementById('result-screen').classList.add('active');
-      setTimeout(() => drawRadarChart(result.scores), 100);
     }
 
     function restartQuiz() {
       currentQuestion = 0;
       scores = { gryffindor: 0, hufflepuff: 0, ravenclaw: 0, slytherin: 0 };
+      characterScores = {
+        harry: 0, hermione: 0, ron: 0,
+        newt: 0, cedric: 0,
+        luna: 0, cho: 0,
+        snape: 0, draco: 0,
+      };
       answers = [];
       lastResult = null;
       document.getElementById('result-screen').classList.remove('active');
@@ -547,22 +909,234 @@
 
     window.restartQuiz = restartQuiz;
 
-    function shareResult() {
+    function getSharePayload() {
       const result = lastResult || getResult();
-      const text = `我在霍格沃茨分院测试中属于${HOUSE_COLORS[result.house].name}，最像${result.character.name}！`;
+      const copy = RESULT_COPY[result.character.id];
+      const text = `分院帽把我分到了${HOUSE_COLORS[result.house].name}，我最像${result.character.name}，专属咒语是 ${copy.spell}（${copy.pronunciation}）。`;
       const url = 'https://pjhp.afeng.click/';
+      return { title: '霍格沃茨分院测试', text, url, fullText: `${text} ${url}` };
+    }
 
-      if (navigator.share) {
-        navigator.share({ title: '霍格沃茨分院测试', text: text + ' ' + url }).catch(() => {});
-      } else if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text + ' ' + url)
-          .then(() => alert('结果已复制到剪贴板！'))
-          .catch(() => alert('复制失败，请手动复制'));
-      } else {
-        alert('您的浏览器不支持分享功能');
-      }
+    function shareResult() {
+      const panel = document.getElementById('share-panel');
+      const summary = document.getElementById('share-summary');
+      const payload = getSharePayload();
+      summary.textContent = payload.text;
+      panel.classList.add('active');
     }
     window.shareResult = shareResult;
+
+    function closeSharePanel() {
+      document.getElementById('share-panel').classList.remove('active');
+    }
+    window.closeSharePanel = closeSharePanel;
+
+    function nativeShareResult() {
+      const payload = getSharePayload();
+      if (navigator.share) {
+        navigator.share({ title: payload.title, text: payload.fullText }).catch(() => {});
+      } else {
+        copyShareLink();
+      }
+    }
+    window.nativeShareResult = nativeShareResult;
+
+    async function copyText(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (error) {
+          // Fall back to the textarea method below when browser permissions block Clipboard API.
+        }
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.top = '-9999px';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (error) {
+        copied = false;
+      }
+      document.body.removeChild(textarea);
+      return copied;
+    }
+
+    async function copyShareLink() {
+      const payload = getSharePayload();
+      const status = document.getElementById('share-summary');
+      const copied = await copyText(payload.url);
+      if (copied && status) {
+        status.textContent = `测试链接已复制：${payload.url}`;
+      } else if (status) {
+        status.textContent = `复制失败，请长按复制：${payload.url}`;
+      } else {
+        alert(`复制失败，请手动复制链接：${payload.url}`);
+      }
+    }
+    window.copyShareLink = copyShareLink;
+
+    function roundRectPath(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 4) {
+      const words = Array.from(text);
+      const lines = [];
+      let line = '';
+      words.forEach((word) => {
+        const testLine = line + word;
+        if (ctx.measureText(testLine).width > maxWidth && line) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = testLine;
+        }
+      });
+      if (line) lines.push(line);
+      const visibleLines = lines.slice(0, maxLines);
+      visibleLines.forEach((visibleLine, index) => {
+        const output = index === maxLines - 1 && lines.length > maxLines
+          ? `${visibleLine.slice(0, -1)}...`
+          : visibleLine;
+        ctx.fillText(output, x, y + index * lineHeight);
+      });
+      return y + visibleLines.length * lineHeight;
+    }
+
+    function drawPosterFrame(ctx, width, height) {
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, '#2a1c24');
+      gradient.addColorStop(0.52, '#493025');
+      gradient.addColorStop(1, '#1a1723');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.fillStyle = 'rgba(244, 210, 106, 0.08)';
+      ctx.beginPath();
+      ctx.arc(120, 150, 260, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(760, 980, 320, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(244, 210, 106, 0.45)';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(46, 46, width - 92, height - 92);
+      ctx.strokeStyle = 'rgba(244, 210, 106, 0.22)';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(68, 68, width - 136, height - 136);
+    }
+
+    function loadPosterImage(src) {
+      return new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = () => resolve(null);
+        image.src = src;
+      });
+    }
+
+    async function generatePoster() {
+      const result = lastResult || getResult();
+      const copy = RESULT_COPY[result.character.id];
+      const canvas = document.getElementById('poster-canvas');
+      const preview = document.getElementById('poster-preview');
+      const status = document.getElementById('share-summary');
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width;
+      const height = canvas.height;
+
+      drawPosterFrame(ctx, width, height);
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#f4d26a';
+      ctx.font = '28px Georgia, serif';
+      ctx.fillText('HOGWARTS SORTING RESULT', width / 2, 120);
+
+      ctx.fillStyle = '#fff1cf';
+      ctx.font = '52px Georgia, "Songti SC", serif';
+      ctx.fillText(`${HOUSE_COLORS[result.house].name} · ${result.character.name}`, width / 2, 205);
+
+      const image = await loadPosterImage(getCharacterImage(result.character.id));
+      const imageX = 255;
+      const imageY = 265;
+      const imageW = 390;
+      const imageH = 520;
+      ctx.save();
+      roundRectPath(ctx, imageX, imageY, imageW, imageH, 22);
+      ctx.clip();
+      if (image) {
+        const scale = Math.max(imageW / image.width, imageH / image.height);
+        const drawW = image.width * scale;
+        const drawH = image.height * scale;
+        ctx.drawImage(image, imageX + (imageW - drawW) / 2, imageY, drawW, drawH);
+      } else {
+        ctx.fillStyle = 'rgba(255,255,255,0.08)';
+        ctx.fillRect(imageX, imageY, imageW, imageH);
+        ctx.fillStyle = '#f4d26a';
+        ctx.font = '120px Georgia, serif';
+        ctx.fillText(result.character.name[0], width / 2, imageY + 300);
+      }
+      ctx.restore();
+
+      ctx.strokeStyle = 'rgba(244,210,106,0.5)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(imageX - 10, imageY - 10, imageW + 20, imageH + 20);
+
+      ctx.fillStyle = '#fff7df';
+      ctx.font = '34px Georgia, "Songti SC", serif';
+      const quoteBottom = wrapCanvasText(ctx, copy.scene, width / 2, 875, 690, 54, 3);
+
+      ctx.fillStyle = '#f4d26a';
+      ctx.font = '42px Georgia, serif';
+      ctx.fillText(copy.spell, width / 2, quoteBottom + 72);
+      ctx.fillStyle = '#ead7ad';
+      ctx.font = '25px Georgia, "Songti SC", serif';
+      ctx.fillText(copy.pronunciation, width / 2, quoteBottom + 112);
+      ctx.fillStyle = '#d9c7a3';
+      ctx.font = '24px Georgia, "Songti SC", serif';
+      wrapCanvasText(ctx, copy.meaning, width / 2, quoteBottom + 154, 650, 38, 2);
+
+      ctx.fillStyle = 'rgba(255,255,255,0.1)';
+      ctx.fillRect(180, 1180, 560, 82);
+      ctx.fillStyle = '#fff1cf';
+      ctx.font = '26px Georgia, "Songti SC", serif';
+      ctx.fillText('测试链接：pjhp.afeng.click', width / 2, 1230);
+
+      preview.classList.add('active');
+      if (status) status.textContent = '结果海报已生成，可以保存图片，也可以复制测试链接。';
+    }
+    window.generatePoster = generatePoster;
+
+    function downloadPoster() {
+      const canvas = document.getElementById('poster-canvas');
+      const result = lastResult || getResult();
+      const link = document.createElement('a');
+      link.download = `hogwarts-${result.character.id}-result.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    window.downloadPoster = downloadPoster;
 
     function drawRadarChart(scores) {
       const canvas = document.getElementById('radarCanvas');
